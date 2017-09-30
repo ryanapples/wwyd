@@ -2,7 +2,7 @@ console.log('app.js is running');
 
 // app object w/ title/subtitle
 const app = {
-    title: 'WWYD',
+    title: 'WWKD',
     subtitle: "Do know what to do? Leave your fate up to Kanye.",
     options: []
 };
