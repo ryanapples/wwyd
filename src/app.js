@@ -3,6 +3,19 @@ Component is a class itself hence the extension of Header
 React requires capitalized first letter. If lower, it will not render comp.
 */
 
+class IndecisionApp extends React.Component {
+    render() {
+        return (
+            <div>
+                <Header />
+                <Action />
+                <Options />
+                <AddOption />
+            </div>
+        )
+    }
+}
+
 class Header extends React.Component {
     render() {
         return (
@@ -27,7 +40,20 @@ class Action extends React.Component {
 class Options extends React.Component {
     render() {
         return (
-            <p>Option component placeholder</p>
+            <div>
+                Options Component
+                <Option />
+            </div>
+        )
+    }
+}
+
+class Option extends React.Component {
+    render() {
+        return (
+            <div>
+                Option TEST
+            </div>
         )
     }
 }
@@ -35,18 +61,11 @@ class Options extends React.Component {
 class AddOption extends React.Component {
     render() {
         return (
-            <p>App Option component </p>
+            <div>
+                App Option component  
+            </div>
         );
     }
 }
 
-const jsx = (
-    <div>
-        <Header />
-        <Action />
-        <Options />
-        <AddOption />
-    </div>
-)
-
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
