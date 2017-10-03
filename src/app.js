@@ -5,9 +5,11 @@ React requires capitalized first letter. If lower, it will not render comp.
 
 class IndecisionApp extends React.Component {
     render() {
+        const title = 'WWKD';
+        const subtitle = 'Leave your fate up to Kanye.';
         return (
             <div>
-                <Header />
+                <Header title={title} subtitle={subtitle}/>
                 <Action />
                 <Options />
                 <AddOption />
@@ -20,8 +22,8 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <h1>WWKD?</h1>
-                <h2>Leave your fate up to Kanye.</h2>
+                <h1>{this.props.title}</h1>
+                <h2>{this.props.subtitle}</h2>
             </div>
         );
     }

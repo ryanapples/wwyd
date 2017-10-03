@@ -25,10 +25,12 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'render',
         value: function render() {
+            var title = 'WWKD';
+            var subtitle = 'Leave your fate up to Kanye.';
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: title, subtitle: subtitle }),
                 React.createElement(Action, null),
                 React.createElement(Options, null),
                 React.createElement(AddOption, null)
@@ -57,12 +59,12 @@ var Header = function (_React$Component2) {
                 React.createElement(
                     'h1',
                     null,
-                    'WWKD?'
+                    this.props.title
                 ),
                 React.createElement(
                     'h2',
                     null,
-                    'Leave your fate up to Kanye.'
+                    this.props.subtitle
                 )
             );
         }
