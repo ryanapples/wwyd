@@ -27,12 +27,13 @@ var IndecisionApp = function (_React$Component) {
         value: function render() {
             var title = 'WWKD';
             var subtitle = 'Leave your fate up to Kanye.';
+            var options = ['item 1', 'item 2', 'item 3'];
             return React.createElement(
                 'div',
                 null,
                 React.createElement(Header, { title: title, subtitle: subtitle }),
                 React.createElement(Action, null),
-                React.createElement(Options, null),
+                React.createElement(Options, { options: options }),
                 React.createElement(AddOption, null)
             );
         }
@@ -83,6 +84,11 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
+        key: 'handlePick',
+        value: function handlePick() {
+            alert('handlePick');
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -90,7 +96,7 @@ var Action = function (_React$Component3) {
                 null,
                 React.createElement(
                     'button',
-                    null,
+                    { onClick: this.handlePick },
                     'What should I do?'
                 )
             );
@@ -99,6 +105,9 @@ var Action = function (_React$Component3) {
 
     return Action;
 }(React.Component);
+
+// Add Remove All button
+// Setup handleRemoveAll
 
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
@@ -110,12 +119,24 @@ var Options = function (_React$Component4) {
     }
 
     _createClass(Options, [{
+        key: 'handleRemoveAll',
+        value: function handleRemoveAll() {
+            alert('handleRemoveAll');
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
-                'Options Component',
+                React.createElement(
+                    'button',
+                    { onClick: this.handleRemoveAll },
+                    'Remove All'
+                ),
+                this.props.options.map(function (option) {
+                    return React.createElement(Option, { key: option, optionText: option });
+                }),
                 React.createElement(Option, null)
             );
         }
@@ -139,7 +160,7 @@ var Option = function (_React$Component5) {
             return React.createElement(
                 'div',
                 null,
-                'Option TEST'
+                this.props.optionText
             );
         }
     }]);
