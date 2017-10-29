@@ -73,11 +73,26 @@ class Option extends React.Component {
     }
 }
 
+// define method - handleAddOption
+// selects value typed -> if value, then alert
+
 class AddOption extends React.Component {
+    handleAddOption(e) {
+        e.preventDefault();
+
+        // trim will truncate leading and trailing spaces
+        const option = e.target.elements.option.value.trim();
+        if(option) {
+            alert(option);
+        }                        
+    }
     render() {
         return (
             <div>
-                App Option component  
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="option"/>
+                    <button>Add Option</button>
+                </form>
             </div>
         );
     }
