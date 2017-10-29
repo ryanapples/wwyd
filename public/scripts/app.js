@@ -168,6 +168,9 @@ var Option = function (_React$Component5) {
     return Option;
 }(React.Component);
 
+// define method - handleAddOption
+// selects value typed -> if value, then alert
+
 var AddOption = function (_React$Component6) {
     _inherits(AddOption, _React$Component6);
 
@@ -178,12 +181,32 @@ var AddOption = function (_React$Component6) {
     }
 
     _createClass(AddOption, [{
+        key: 'handleAddOption',
+        value: function handleAddOption(e) {
+            e.preventDefault();
+
+            // trim will truncate leading and trailing spaces
+            var option = e.target.elements.option.value.trim();
+            if (option) {
+                alert(option);
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
-                'App Option component'
+                React.createElement(
+                    'form',
+                    { onSubmit: this.handleAddOption },
+                    React.createElement('input', { type: 'text', name: 'option' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Add Option'
+                    )
+                )
             );
         }
     }]);
