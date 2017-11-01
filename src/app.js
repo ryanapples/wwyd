@@ -4,15 +4,42 @@ React requires capitalized first letter. If lower, it will not render comp.
 */
 
 class IndecisionApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDeleteOptions = this.handleDeleteOptions.bind(this); // bind event handlers to correct instance
+        this.handlePick = this.handlePick.bind(this); // bind event handlers to correct instance
+        this.state = {
+            options: ['Option 1', 'Option 2', 'Option 3']
+        };
+    }
+    handleDeleteOptions() {
+        this.setState(() => {
+            return {
+                options: []
+            };
+        });
+    }
+    handlePick() {
+        this.setState((prevState) => {
+            const randomNum = Math.floor(Math.random() * prevState.options.length);
+            const option = prevState.options[randomNum];
+            alert(option);
+        });
+    }
     render() {
-        const title = 'WWKD';
-        const subtitle = 'Leave your fate up to Kanye.';
-        const options = ['item 1', 'item 2', 'item 3'];
+        const title = 'Indecision';
+        const subtitle = 'No clue? No problem.';
         return (
             <div>
                 <Header title={title} subtitle={subtitle}/>
-                <Action />
-                <Options options={options}/>
+                <Action 
+                    hasOptions={this.state.options.length > 0}
+                    handlePick={this.handlePick}
+                />
+                <Options 
+                    options={this.state.options}
+                    handleDeleteOptions={this.handleDeleteOptions}
+                />
                 <AddOption />
             </div>
         )
@@ -31,34 +58,25 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-    handlePick() {
-        alert('handlePick');
-    }
     render() {
         return (
             <div>
-                <button onClick={this.handlePick}>What should I do?</button>
+                <button
+                    onClick={this.props.handlePick}
+                    disabled={!this.props.hasOptions}
+                >
+                    What should I do?
+                </button>
             </div>
         );
     }
 }
 
-// Add Remove All button
-// Setup handleRemoveAll
-
 class Options extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleRemoveAll = this.handleRemoveAll.bind(this);
-    }
-    handleRemoveAll() {
-        console.log(this.props.options);
-        // alert('handleRemoveAll');
-    }
     render() {
         return (
             <div>
-                <button onClick={this.handleRemoveAll}>Remove All</button>
+                <button onClick={this.props.handleDeleteOptions}>Remove All</button>
                 {
                     this.props.options.map((option) => <Option key={option} optionText={option}/>)
                 }
@@ -77,9 +95,6 @@ class Option extends React.Component {
         )
     }
 }
-
-// define method - handleAddOption
-// selects value typed -> if value, then alert
 
 class AddOption extends React.Component {
     handleAddOption(e) {
