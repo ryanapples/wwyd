@@ -6,8 +6,26 @@ class Counter extends React.Component {
         this.handleReset = this.handleReset.bind(this);
 
         this.state = {
-            count: props.count
+            count: 0
         };
+    }
+    componentDidMount() {
+        console.log('CDM');
+        const stringCount = localStorage.getItem('count');
+        const count = parseInt(stringCount, 10);
+
+        // returns true if NaN, have to invert that
+        // ensures if it IS a number, then do something
+        if (!isNaN(count)) {
+            this.setState(() => ({ count }));
+        }
+    }
+    componentDidUpdate(prevProp, prevState) {
+        console.log('CDU');
+        // check to see if count actually has changed
+        if (prevState.state !== this.state.count) {
+            localStorage.setItem('count', this.state.count);
+        }
     }
     handleAddOne() {
         this.setState((prevState) => {
@@ -42,10 +60,6 @@ class Counter extends React.Component {
             </div>
         )
     }
-}
-
-Counter.defaultProps = {
-    count: 0
 }
 
 ReactDOM.render(<Counter/>, document.getElementById('app'));
