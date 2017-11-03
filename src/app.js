@@ -33,9 +33,6 @@ class IndecisionApp extends React.Component {
             localStorage.setItem('options', json);
         }
     }
-    componentWillUnmount() {
-        console.log('componentWillUnmount');
-    }
     handleDeleteOptions() {
         this.setState(() => ({ options: [] }));
     }
