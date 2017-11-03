@@ -14,10 +14,31 @@ class IndecisionApp extends React.Component {
             options: props.options
         };
     }
+    componentDidMount() {
+        try {
+            const json = localStorage.getItem('options');
+            const options = JSON.parse(json);
+    
+            if(options) {
+                this.setState(() => ({ options }));            
+            }
+        } catch (e) {
+            // do nothing at all
+        }
+    }
+    componentDidUpdate(prevProp, prevState) {
+        // cond. to ensure save data when data is updated
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+        }
+    }
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+    }
     handleDeleteOptions() {
         this.setState(() => ({ options: [] }));
     }
-
     handleDeleteOption(optionToRemove) {
         this.setState((prevState) => ({
             options: prevState.options.filter((option) => optionToRemove !== option)
@@ -25,7 +46,6 @@ class IndecisionApp extends React.Component {
                 // if option is not the item stays in arr, vice versa
         }));
     }
-
     handlePick() {
         this.setState((prevState) => {
             const randomNum = Math.floor(Math.random() * prevState.options.length);
@@ -99,6 +119,7 @@ const Options = (props) => {
     return (
         <div>
             <button onClick={props.handleDeleteOptions}>Remove All</button>
+            {props.options.length === 0 && <p>Please add option to get started!</p>}
             {
                 props.options.map((option) => (
                     <Option 
@@ -138,11 +159,16 @@ class AddOption extends React.Component {
     handleAddOption(e) {
         e.preventDefault();
 
-        // trim will truncate leading and trailing spaces
+        // Trim will truncate leading and trailing spaces
         const option = e.target.elements.option.value.trim();
         const error = this.props.handleAddOption(option);
     
         this.setState(() => ({ error }));
+
+        // Clear input if there was no error
+        if(!error) {
+            e.target.elements.option.value = '';
+        }
     }
     render() {
         return (
