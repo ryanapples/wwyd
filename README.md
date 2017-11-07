@@ -1,11 +1,11 @@
 # wwyd
 
-An single-page React.js application that helps alleviate indecisiveness. Better yet, Kanye will decide for you.
+An single-page React.js application that helps alleviate indecisiveness.
 
 ### Technologies
 - React.js
-- Babel
 - Webpack
+- Babel
 - SCSS
 
 
