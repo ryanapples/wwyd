@@ -7,7 +7,3 @@ An single-page React.js application that helps alleviate indecisiveness.
 - Webpack
 - Babel
 - SCSS
-
-
-### Created by
-Ryan Apellanes
