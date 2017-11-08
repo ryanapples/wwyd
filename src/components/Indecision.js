@@ -24,13 +24,11 @@ export default class IndecisionApp extends React.Component {
         this.setState(() => ({ selectedOption: undefined }));
     }
     handlePick = () => {
-        this.setState((prevState) => {
-            const randomNum = Math.floor(Math.random() * prevState.options.length);
-            const option = prevState.options[randomNum];
-            this.setState(() => ({
-                selectedOption: option
-            }));
-        });
+        const randomNum = Math.floor(Math.random() * prevState.options.length);
+        const option = prevState.options[randomNum];
+        this.setState(() => ({
+            selectedOption: option
+        }));
     }
     handleAddOption = (option) => {
         if (!option) {
